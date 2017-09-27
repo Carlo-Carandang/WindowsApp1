@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class ContactForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -32,7 +32,7 @@ Partial Class Form1
         '
         'bn_next
         '
-        Me.bn_next.Location = New System.Drawing.Point(173, 208)
+        Me.bn_next.Location = New System.Drawing.Point(144, 226)
         Me.bn_next.Name = "bn_next"
         Me.bn_next.Size = New System.Drawing.Size(75, 23)
         Me.bn_next.TabIndex = 0
@@ -41,14 +41,14 @@ Partial Class Form1
         '
         'fname
         '
-        Me.fname.Location = New System.Drawing.Point(147, 78)
+        Me.fname.Location = New System.Drawing.Point(80, 38)
         Me.fname.Name = "fname"
         Me.fname.Size = New System.Drawing.Size(100, 20)
         Me.fname.TabIndex = 1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(89, 208)
+        Me.Button2.Location = New System.Drawing.Point(63, 226)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 2
@@ -57,7 +57,7 @@ Partial Class Form1
         '
         'tb_index
         '
-        Me.tb_index.Location = New System.Drawing.Point(190, 13)
+        Me.tb_index.Location = New System.Drawing.Point(80, 10)
         Me.tb_index.Name = "tb_index"
         Me.tb_index.Size = New System.Drawing.Size(58, 20)
         Me.tb_index.TabIndex = 3
@@ -65,22 +65,22 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(138, 19)
+        Me.Label2.Location = New System.Drawing.Point(12, 13)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(32, 13)
+        Me.Label2.Size = New System.Drawing.Size(68, 13)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "index"
+        Me.Label2.Text = "current index"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(86, 81)
+        Me.Label3.Location = New System.Drawing.Point(12, 38)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(52, 13)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "first name"
         '
-        'Form1
+        'ContactForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -91,7 +91,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.fname)
         Me.Controls.Add(Me.bn_next)
-        Me.Name = "Form1"
+        Me.Name = "ContactForm"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
