@@ -17,7 +17,8 @@
 '
 ' Add Next and Prevous Buttons to navigate through the file ( handle index 0 and max index)
 ' Display the current index at all times
-'
+' Add a Status TextBox and dispaly any formatting errors that are encoutered, 
+' If multiple errors exist only show last one.
 '
 ' Please always try to write clean And readable code
 ' Here Is a good reference doc http://ricardogeek.com/docs/clean_code.html  
