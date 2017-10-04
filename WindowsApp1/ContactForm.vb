@@ -2,9 +2,10 @@
 '  Sample code was taken from:
 '  'https://docs.microsoft.com/en-us/dotnet/visual-basic/developing-apps/programming/drives-directories-files/how-to-read-from-comma-delimited-text-files
 ' 
-' Requirements:
-' Exapand on the below example to create a Display the contents of the CSV file created in Assignment1
-' For contacts with the following data
+' Assignment #1
+' Due Oct 14, 2017
+'
+' Requirement 1: Expand on this form ti display information in database that displays the following information
 ' First Name (TextBox)
 ' Last Name (TextBox)
 ' Street Number (TextBox)
@@ -15,10 +16,13 @@
 ' Phone Number (TextBox)( http://www.visual-basic-tutorials.com/Tutorials/Strings/validate-phone-number-in-visual-basic.htm)
 ' email Address (TextBox)( https://stackoverflow.com/questions/1331084/how-do-i-validate-email-address-formatting-with-the-net-framework)
 '
-' Add Next and Prevous Buttons to navigate through the file ( handle index 0 and max index)
-' Display the current index at all times
+' Add Next and Prevous Buttons to navigate through the database ( handle index 0 and max index)
+' Display the current primary key of the database in a textbox or label
 ' Add a Status TextBox and dispaly any formatting errors that are encoutered, 
 ' If multiple errors exist only show last one.
+
+' Requirement 2: Expand on the below example to create a import the contents of the CSV file 
+' created in Assignment1, ready the data and save data to database
 '
 ' Please always try to write clean And readable code
 ' Here Is a good reference doc http://ricardogeek.com/docs/clean_code.html  
