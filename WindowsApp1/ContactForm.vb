@@ -2,10 +2,10 @@
 '  Sample code was taken from:
 '  'https://docs.microsoft.com/en-us/dotnet/visual-basic/developing-apps/programming/drives-directories-files/how-to-read-from-comma-delimited-text-files
 ' 
-' Assignment #1
-' Due Oct 14, 2017
+' Assignment #2
+' Due Oct 11, 2017
 '
-' Requirement 1: Expand on this form ti display information in database that displays the following information
+' Requirement 1: Expand on this form to display information in database that displays the following fields
 ' First Name (TextBox)
 ' Last Name (TextBox)
 ' Street Number (TextBox)
@@ -22,7 +22,10 @@
 ' If multiple errors exist only show last one.
 
 ' Requirement 2: Expand on the below example to create a import the contents of the CSV file 
-' created in Assignment1, ready the data and save data to database
+' created in Assignment1, read the data into entity classes and save data to database.  
+' After import Next and Prev buttons should work.
+'
+' TODO for Dan - add example of how to save data
 '
 ' Please always try to write clean And readable code
 ' Here Is a good reference doc http://ricardogeek.com/docs/clean_code.html  
@@ -121,6 +124,27 @@ Public Class ContactForm
         'index = index - 1
 
         'UpdateData(index)
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        ImportCSVFile()
+    End Sub
+
+    Private Sub ImportCSVFile()
+        Dim importFile As String = ""
+
+        Dim fd As OpenFileDialog = New OpenFileDialog()
+        fd.Title = "Select CSV file to import"
+        fd.Filter = "All files (*.*)|*.*|All files (*.*)|*.*"
+        fd.FilterIndex = 2
+        fd.RestoreDirectory = True
+        If fd.ShowDialog() = DialogResult.OK Then
+            importFile = fd.FileName
+        Else
+
+        End If
+
 
     End Sub
 
