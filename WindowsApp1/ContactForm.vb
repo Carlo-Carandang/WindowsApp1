@@ -42,6 +42,14 @@ Public Class ContactForm
     Dim allData As New Dictionary(Of Integer, Customer)
 
     Dim RowIdxFirstName As Integer = 0
+    Dim RowIdxLastName As Integer = 1
+    Dim RowIdxStreetNo As Integer = 2
+    Dim RowIdxCity As Integer = 3
+    Dim RowIdxProvince As Integer = 4
+    Dim RowIdxCountry As Integer = 5
+    Dim RowIdxPostalCode As Integer = 6
+    Dim RowIdxPhoneNo As Integer = 7
+    Dim RowIdxEmail As Integer = 8
 
     Private Sub NextButton_Click(sender As Object, e As EventArgs) Handles bn_next.Click
         'TODO check for max
@@ -56,7 +64,15 @@ Public Class ContactForm
         Dim personData As Customer = Nothing
         If allData.TryGetValue(index, personData) Then
             tb_index.Text = index
-            fname.Text = personData.firstName
+            fname.Text = personData.FirstName
+            lname.Text = personData.LastName
+            street.Text = personData.StreetNo
+            city.Text = personData.City
+            province.Text = personData.Province
+            country.Text = personData.Country
+            postalcode.Text = personData.PostalCode
+            phone.Text = personData.PhoneNo
+            email.Text = personData.Email
         End If
     End Sub
 
@@ -69,7 +85,7 @@ Public Class ContactForm
     Private Sub LoadFromDatabase()
         allData.Clear()
         Dim index As Integer = 0
-        Using context As New Model1
+        Using context As New Model2
             Dim listOfCustomers = context.Customers.ToList
 
             For Each cust As Customer In listOfCustomers
@@ -95,9 +111,16 @@ Public Class ContactForm
                     Dim currentField As String
                     Dim NewCust As New Customer
                     For Each currentField In currentRow
-                        NewCust.firstName = currentField
-                        'NewCust.lastName = currentField
-                        Using context As New Model1
+                        NewCust.FirstName = currentField
+                        NewCust.LastName = currentField
+                        NewCust.StreetNo = currentField
+                        NewCust.City = currentField
+                        NewCust.Province = currentField
+                        NewCust.Country = currentField
+                        NewCust.PostalCode = currentField
+                        NewCust.PhoneNo = currentField
+                        NewCust.Email = currentField
+                        Using context As New Model2
                             context.Customers.Add(NewCust)
                             context.SaveChanges()
                         End Using
@@ -137,7 +160,7 @@ Public Class ContactForm
 
         End If
         'TODO use variable importFile from above
-        Dim csvFile As String = "C:\Users\dpenny\Documents\Source\Repos\mcda5510_assignments\WindowsApp1\names.csv"
+        Dim csvFile As String = "C:\Users\Carlo\source\Repos\src5\WindowsApp1\customers.csv"
         LoadFromCSVFile(csvFile)
 
     End Sub

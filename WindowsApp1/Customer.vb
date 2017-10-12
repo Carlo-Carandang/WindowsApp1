@@ -6,8 +6,15 @@ Imports System.Data.Entity.Spatial
 
 <Table("Customer")>
 Partial Public Class Customer
-    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
 
-    Public Property firstName As String
+    Public Property FirstName As String
+    Public Property LastName As String
+    Public Property StreetNo As String
+    Public Property City As String
+    Public Property Province As String
+    Public Property Country As String
+    Public Property PostalCode As String
+    Public Property PhoneNo As String
+    Public Property Email As String
 End Class

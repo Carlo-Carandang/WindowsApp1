@@ -13,6 +13,14 @@ GO
 CREATE TABLE [dbo].[Customer](
 	[ID] [int] IDENTITY(1,1) NOT NULL,  
 	[firstName] [varchar](max) NULL,
+	[lastName] [varchar](max) NULL,
+	[streetNo] [varchar](max) NULL,
+	[city] [varchar](max) NULL,
+	[province] [varchar](max) NULL,
+	[country] [varchar](max) NULL,
+	[postalCode] [varchar](max) NULL,
+	[phoneNo] [varchar](max) NULL,
+	[email] [varchar](max) NULL,
  CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
