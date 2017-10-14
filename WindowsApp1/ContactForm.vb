@@ -105,29 +105,35 @@ Public Class ContactForm
             Dim currentRow As String()
             Dim rowNumber As Integer = 0
             While Not MyReader.EndOfData
-                Try
-                    currentRow = MyReader.ReadFields()
-                    Dim rowData As New ArrayList
-                    Dim currentField As String
-                    Dim NewCust As New Customer
-                    For Each currentField In currentRow
-                        NewCust.FirstName = currentField
-                        NewCust.LastName = currentField
-                        NewCust.StreetNo = currentField
-                        NewCust.City = currentField
-                        NewCust.Province = currentField
-                        NewCust.Country = currentField
-                        NewCust.PostalCode = currentField
-                        NewCust.PhoneNo = currentField
-                        NewCust.Email = currentField
-                        Using context As New Model2
-                            context.Customers.Add(NewCust)
-                            context.SaveChanges()
-                        End Using
-                    Next
-                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
-                End Try
+                
+                    Try
+                        currentRow = MyReader.ReadFields()
+                        Dim rowData As New ArrayList
+                        Dim currentField As String
+                        Dim NewCust As New Customer
+                        For Each currentField In currentRow
+                            rowData.Add(currentField)
+                        Next
+                        NewCust.FirstName = rowData.Item(RowIdxFirstName)
+                        NewCust.LastName = rowData.Item(RowIdxLastName)
+                        NewCust.StreetNo = rowData.Item(RowIdxStreetNo)
+                        NewCust.City = rowData.Item(RowIdxCity)
+                        NewCust.Province = rowData.Item(RowIdxProvince)
+                        NewCust.Country = rowData.Item(RowIdxCountry)
+                        NewCust.PostalCode = rowData.Item(RowIdxPostalCode)
+                        NewCust.PhoneNo = rowData.Item(RowIdxPhoneNo)
+                        NewCust.Email = rowData.Item(RowIdxEmail)
+                    If( rowNumber <>0) Then
+                            Using context As New Model2
+                                context.Customers.Add(NewCust)
+                                context.SaveChanges()
+                            End Using
+                        End if
+                    Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                        MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
+                    End Try
+                    
+                rowNumber=rowNumber+1
             End While
         End Using
         LoadFromDatabase()
