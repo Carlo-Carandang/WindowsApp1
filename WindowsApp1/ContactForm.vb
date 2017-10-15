@@ -30,10 +30,9 @@
 ' Here Is a good reference doc http://ricardogeek.com/docs/clean_code.html  
 ' Submit to Bitbucket under Assignment2
 
-'Imports System.Text.RegularExpressions
+Imports System.Text.RegularExpressions
 
 Public Class ContactForm
-
     Dim index As Integer = 0
 
     Dim allData As New Dictionary(Of Integer, Customer)
@@ -49,11 +48,8 @@ Public Class ContactForm
     Dim RowIdxEmail As Integer = 8
 
     Private Sub NextButton_Click(sender As Object, e As EventArgs) Handles bn_next.Click
-
         index = index + 1
-
         UpdateData(index)
-
     End Sub
 
     Private Sub UpdateData(index As Integer)
@@ -73,9 +69,7 @@ Public Class ContactForm
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         LoadFromDatabase()
-
     End Sub
 
     Private Sub LoadFromDatabase()
@@ -83,7 +77,6 @@ Public Class ContactForm
         Dim index As Integer = 0
         Using context As New Model2
             Dim listOfCustomers = context.Customers.ToList
-
             For Each cust As Customer In listOfCustomers
                 allData.Add(index, cust)
                 UpdateData(index)
@@ -100,50 +93,68 @@ Public Class ContactForm
             MyReader.SetDelimiters(",")
             Dim currentRow As String()
             Dim rowNumber As Integer = 0
+            Dim postal_code As Boolean
+            Dim phone As Boolean
+            Dim mail As Boolean
             While Not MyReader.EndOfData
-                
-                    Try
-                        currentRow = MyReader.ReadFields()
-                        Dim rowData As New ArrayList
-                        Dim currentField As String
-                        Dim NewCust As New Customer
-                        For Each currentField In currentRow
-                            rowData.Add(currentField)
-                        Next
-                        NewCust.FirstName = rowData.Item(RowIdxFirstName)
-                        NewCust.LastName = rowData.Item(RowIdxLastName)
-                        NewCust.StreetNo = rowData.Item(RowIdxStreetNo)
-                        NewCust.City = rowData.Item(RowIdxCity)
-                        NewCust.Province = rowData.Item(RowIdxProvince)
-                        NewCust.Country = rowData.Item(RowIdxCountry)
-                        NewCust.PostalCode = rowData.Item(RowIdxPostalCode)
-                        NewCust.PhoneNo = rowData.Item(RowIdxPhoneNo)
-                        NewCust.Email = rowData.Item(RowIdxEmail)
+                Try
+                    currentRow = MyReader.ReadFields()
+                    Dim rowData As New ArrayList
+                    Dim currentField As String
+                    Dim NewCust As New Customer
+                    For Each currentField In currentRow
+                        rowData.Add(currentField)
+                    Next
+
+                    NewCust.FirstName = rowData.Item(RowIdxFirstName)
+                    NewCust.LastName = rowData.Item(RowIdxLastName)
+                    NewCust.StreetNo = rowData.Item(RowIdxStreetNo)
+                    NewCust.City = rowData.Item(RowIdxCity)
+                    NewCust.Province = rowData.Item(RowIdxProvince)
+                    NewCust.Country = rowData.Item(RowIdxCountry)
+                    NewCust.PostalCode = rowData.Item(RowIdxPostalCode)
+                    NewCust.PhoneNo = rowData.Item(RowIdxPhoneNo)
+                    NewCust.Email = rowData.Item(RowIdxEmail)
 
                     'skip the header row from being written to the database- otherwise it saves the rest of the rows
+                    If (rowNumber <> 0) Then
+                        Using context As New Model2
+                            context.Customers.Add(NewCust)
+                            context.SaveChanges()
+                        End Using
 
-                    If( rowNumber <>0) Then
-                            Using context As New Model2
-                                context.Customers.Add(NewCust)
-                                context.SaveChanges()
-                            End Using
-                        End if
-                    Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                        MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
-                    End Try
-                    
-                rowNumber=rowNumber+1
+                        'validating postal code
+                        postal_code = CanBeValidCanadianPostalCode(NewCust.PostalCode)
+                        If Not postal_code Then
+                            MsgBox("Invalid postal code")
+                        End If
+
+                        'validating phone
+                        phone = IsValidPhone(NewCust.PhoneNo)
+                        If Not phone Then
+                            MsgBox("Invalid phone number")
+                        End If
+
+                        'validating mail
+                        mail = IsValidEmailFormat(NewCust.Email)
+                        If Not mail Then
+                            MsgBox("Invalid email address")
+                        End If
+
+                    End If
+
+                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                    MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
+                End Try
+                rowNumber = rowNumber + 1
             End While
         End Using
         LoadFromDatabase()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
         index = index - 1
-
         UpdateData(index)
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -152,7 +163,6 @@ Public Class ContactForm
 
     Private Sub ImportCSVFile()
         Dim importFile As String = ""
-
         Dim fd As OpenFileDialog = New OpenFileDialog()
         fd.Title = "Select CSV file to import"
         fd.Filter = "All files (*.*)|*.*|All files (*.*)|*.*"
@@ -161,28 +171,30 @@ Public Class ContactForm
         If fd.ShowDialog() = DialogResult.OK Then
             importFile = fd.FileName
         Else
-
         End If
-
         Dim csvFile As String = "C:\Users\Carlo\source\Repos\src5\WindowsApp1\customers.csv"
         LoadFromCSVFile(csvFile)
-
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Me.Close()
     End Sub
 
-    'Private Function CanBeValidCanadianPostalCode(postal_code As String) As Boolean
-    '    Return Regex.IsMatch(postal_code.Replace(" ", "").ToUpper, "([A-Z]\d){3}")
-    'End Function
+    Private Function CanBeValidCanadianPostalCode(ByVal q As String) As Boolean
+        Return Regex.IsMatch(q.Replace(" ", "").ToUpper, "([A-Z]\d){3}")
+    End Function
 
-    'Private Function IsValidPhone(phone As String) As Boolean
-    '    Return Regex.IsMatch(phone, "\(\d{3}\)\d{3}-\d{4}")
-    'End Function
+    Private Function IsValidPhone(ByVal r As String) As Boolean
+        Return Regex.IsMatch(r, "\d{3}-\d{3}-\d{4}")
+    End Function
 
-    'Private Function IsValidEmailFormat(ByVal s As String) As Boolean
-    '    Return Regex.IsMatch(s, "^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$")
-    'End Function
+    Private Function IsValidEmailFormat(ByVal s As String) As Boolean
+        Return Regex.IsMatch(s, "^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$")
+    End Function
+
+    'Status textbox to display validation/formatting errors
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+
+    End Sub
 
 End Class
