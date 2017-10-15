@@ -3,7 +3,7 @@
 '  'https://docs.microsoft.com/en-us/dotnet/visual-basic/developing-apps/programming/drives-directories-files/how-to-read-from-comma-delimited-text-files
 ' 
 ' Assignment #2
-' Due Oct 11, 2017
+' Due Oct 16, 2017
 '
 ' Requirement 1: Expand on this form to display information in database that displays the following fields
 ' First Name (TextBox)
@@ -25,20 +25,17 @@
 ' created in Assignment1, read the data into entity classes and save data to database.  
 ' After import Next and Prev buttons should work.
 '
-' TODO for Dan - add example of how to save data
 '
 ' Please always try to write clean And readable code
 ' Here Is a good reference doc http://ricardogeek.com/docs/clean_code.html  
 ' Submit to Bitbucket under Assignment2
 
+'Imports System.Text.RegularExpressions
 
 Public Class ContactForm
 
     Dim index As Integer = 0
 
-    'hashtable sample code
-    ' https://support.microsoft.com/en-ca/help/307933/how-to-work-with-the-hashtable-collection-in-visual-basic--net-or-in-v
-    '
     Dim allData As New Dictionary(Of Integer, Customer)
 
     Dim RowIdxFirstName As Integer = 0
@@ -52,7 +49,6 @@ Public Class ContactForm
     Dim RowIdxEmail As Integer = 8
 
     Private Sub NextButton_Click(sender As Object, e As EventArgs) Handles bn_next.Click
-        'TODO check for max
 
         index = index + 1
 
@@ -123,6 +119,9 @@ Public Class ContactForm
                         NewCust.PostalCode = rowData.Item(RowIdxPostalCode)
                         NewCust.PhoneNo = rowData.Item(RowIdxPhoneNo)
                         NewCust.Email = rowData.Item(RowIdxEmail)
+
+                    'skip the header row from being written to the database- otherwise it saves the rest of the rows
+
                     If( rowNumber <>0) Then
                             Using context As New Model2
                                 context.Customers.Add(NewCust)
@@ -140,7 +139,6 @@ Public Class ContactForm
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'TODO check for 0
 
         index = index - 1
 
@@ -165,10 +163,26 @@ Public Class ContactForm
         Else
 
         End If
-        'TODO use variable importFile from above
+
         Dim csvFile As String = "C:\Users\Carlo\source\Repos\src5\WindowsApp1\customers.csv"
         LoadFromCSVFile(csvFile)
 
     End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Me.Close()
+    End Sub
+
+    'Private Function CanBeValidCanadianPostalCode(postal_code As String) As Boolean
+    '    Return Regex.IsMatch(postal_code.Replace(" ", "").ToUpper, "([A-Z]\d){3}")
+    'End Function
+
+    'Private Function IsValidPhone(phone As String) As Boolean
+    '    Return Regex.IsMatch(phone, "\(\d{3}\)\d{3}-\d{4}")
+    'End Function
+
+    'Private Function IsValidEmailFormat(ByVal s As String) As Boolean
+    '    Return Regex.IsMatch(s, "^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$")
+    'End Function
 
 End Class

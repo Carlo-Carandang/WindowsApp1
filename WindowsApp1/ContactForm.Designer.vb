@@ -48,12 +48,15 @@ Partial Class ContactForm
         Me.Label11 = New System.Windows.Forms.Label()
         Me.email = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'bn_next
         '
-        Me.bn_next.Location = New System.Drawing.Point(93, 303)
+        Me.bn_next.Location = New System.Drawing.Point(96, 330)
         Me.bn_next.Name = "bn_next"
         Me.bn_next.Size = New System.Drawing.Size(75, 23)
         Me.bn_next.TabIndex = 0
@@ -69,7 +72,7 @@ Partial Class ContactForm
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(12, 303)
+        Me.Button2.Location = New System.Drawing.Point(15, 330)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 2
@@ -107,7 +110,7 @@ Partial Class ContactForm
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.TextBox1)
         Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Location = New System.Drawing.Point(11, 332)
+        Me.Panel1.Location = New System.Drawing.Point(11, 359)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(345, 64)
         Me.Panel1.TabIndex = 6
@@ -123,7 +126,7 @@ Partial Class ContactForm
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(7, 31)
+        Me.TextBox1.Location = New System.Drawing.Point(6, 28)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(258, 20)
         Me.TextBox1.TabIndex = 1
@@ -265,11 +268,39 @@ Partial Class ContactForm
         Me.Label12.TabIndex = 22
         Me.Label12.Text = "email"
         '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(80, 289)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(276, 20)
+        Me.TextBox2.TabIndex = 23
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(15, 295)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(37, 13)
+        Me.Label13.TabIndex = 24
+        Me.Label13.Text = "Status"
+        '
+        'btnExit
+        '
+        Me.btnExit.Location = New System.Drawing.Point(277, 330)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(75, 23)
+        Me.btnExit.TabIndex = 25
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
+        '
         'ContactForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(372, 408)
+        Me.ClientSize = New System.Drawing.Size(372, 431)
+        Me.Controls.Add(Me.btnExit)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.email)
         Me.Controls.Add(Me.Label11)
@@ -329,4 +360,7 @@ Partial Class ContactForm
     Friend WithEvents Label11 As Label
     Friend WithEvents email As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents btnExit As Button
 End Class

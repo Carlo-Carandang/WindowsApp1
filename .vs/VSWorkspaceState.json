@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WindowsApp1"
+    "\\WindowsApp1",
+    "\\WindowsApp1\\bin",
+    "\\WindowsApp1\\bin\\Release",
+    "\\WindowsApp1\\obj\\Debug",
+    "\\WindowsApp1\\obj\\Release"
   ],
-  "SelectedNode": "\\WindowsApp1\\ContactForm.vb",
+  "SelectedNode": "\\WindowsApp1.sln",
   "PreviewInSolutionExplorer": false
 }
