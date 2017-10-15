@@ -126,25 +126,25 @@ Public Class ContactForm
                         'validating postal code
                         postal_code = CanBeValidCanadianPostalCode(NewCust.PostalCode)
                         If Not postal_code Then
-                            MsgBox("Invalid postal code")
+                            TextBox2.Text = "Invalid postal code"
                         End If
 
                         'validating phone
                         phone = IsValidPhone(NewCust.PhoneNo)
                         If Not phone Then
-                            MsgBox("Invalid phone number")
+                            TextBox2.Text = "Invalid phone number"
                         End If
 
                         'validating mail
                         mail = IsValidEmailFormat(NewCust.Email)
                         If Not mail Then
-                            MsgBox("Invalid email address")
+                            TextBox2.Text = "Invalid email address"
                         End If
 
                     End If
 
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
+                    TextBox2.Text = "Line " & ex.Message & "is not valid and will be skipped."
                 End Try
                 rowNumber = rowNumber + 1
             End While
@@ -191,10 +191,5 @@ Public Class ContactForm
     Private Function IsValidEmailFormat(ByVal s As String) As Boolean
         Return Regex.IsMatch(s, "^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$")
     End Function
-
-    'Status textbox to display validation/formatting errors
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-
-    End Sub
 
 End Class
